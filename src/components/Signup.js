@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import { useHistory } from 'react-router-dom';
 
-const Signup = () => {
+const Signup = (props) => {
     const [credentials, setCredentials] = useState({name:"" ,email: "", password: "", cpassword: ""});
     let history = useHistory();
     const host = "http://localhost:4000";
@@ -22,9 +22,10 @@ const Signup = () => {
             // save the authtoken and reditrect
             localStorage.setItem('token', json.authtoken);
             history.push("/");
+            props.showAlert("Account Created Successfully", "success");
         }
         else{
-            alert("User Already Exists");
+            props.showAlert("Invalid Details", "danger");
         }
     }
 
